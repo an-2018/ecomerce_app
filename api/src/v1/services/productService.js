@@ -23,4 +23,8 @@ export default class ProductService {
         // TODO: delete product
         return await Product.findByIdAndDelete(id)
     }
+
+    async search(query) {
+        return await productStore.filterBy(query)
+    }
 }
