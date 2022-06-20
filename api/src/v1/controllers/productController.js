@@ -6,7 +6,7 @@ export default class ProductController {
         this.productService = new ProductService();
     }
 
-    async createProduct(req, res) {
+    async create(req, res) {
         // TODO: add input validation
         try {
             const data = {
@@ -26,20 +26,19 @@ export default class ProductController {
         }
     }
 
-    async getAllProducts(req, res) {
+    async getAll(req, res) {
         // TODO: add input validation
         // TODO: add pagination
         try {
             const products = await this.productService.getAll();
-            res.status(200).json(products);
+            res.status(200).json({ products: products });
         } catch (err) {
             res.status(500).json({ error: err.message })
         }
     }
 
-    async getProductById(req, res) {
+    async getById(req, res) {
         try {
-            console.log("params",)
             if (!Number(req.params.id)) {
                 res.status(400).json({ error: "Invalid id" })
             }
@@ -50,7 +49,7 @@ export default class ProductController {
         }
     }
 
-    async updateProduct(req, res) {
+    async update(req, res) {
         try {
             const updatedProduct = await this.productService.updateProduct(req.params.id, res.body);
             res.status(200).json(updatedProduct);
@@ -59,7 +58,7 @@ export default class ProductController {
         }
     }
 
-    async deleteProduct(req, res) {
+    async delete(req, res) {
         try {
             this.productService.deleteProduct(req.params.id);
             res.status(204).json();

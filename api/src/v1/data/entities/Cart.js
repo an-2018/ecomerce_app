@@ -1,6 +1,6 @@
 'use strict';
 class Cart{
-    constructor(id, userId, createdAt, updatedAt){
+    constructor({id, userId, createdAt, updatedAt}){
         this.id = id;
         this.userId = userId;
         this.createdAt = createdAt;

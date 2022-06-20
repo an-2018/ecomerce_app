@@ -6,7 +6,7 @@ Postman collection documentation:
 https://documenter.getpostman.com/view/10016837/UzBnpm4p
 
 ## About
-An api to get and store data on the e-commerce app.
+An API to get and store data on the e-commerce app.
 - Entities
     - [x] Product
     - [ ] Category
@@ -20,7 +20,7 @@ An api to get and store data on the e-commerce app.
     - [x] review
 
 ## Features
-- [ ]  Filter and search for products by name, adjectives, discounts, price;
+- [x]  Filter and search for products by name, adjectives, discounts, price;
 - [ ]  Save products in a a wish list of its clients;
 - [ ]  Save selected products to the shopping cart;
 - [ ]  Allow users to let comments and make review on products;
