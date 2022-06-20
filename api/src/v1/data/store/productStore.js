@@ -25,6 +25,7 @@ const filterBy = async (query) => {
                 result.push(
                     product.name.toLowerCase().includes(query.text.toLowerCase())
                     || product.description.toLowerCase().includes(query.text.toLowerCase())
+                    || product.details.adjective.toLowerCase().includes(query.text.toLowerCase())
                     )
             }
             if (query.hasDiscount) {
