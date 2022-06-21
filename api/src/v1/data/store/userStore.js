@@ -18,8 +18,21 @@ const findOne = (id) => {
     return users.find(user => user.id === Number(id))
 }
 
+const findByIdAndUpdate = async (id, data) => {
+    const userUpdated = findOne(id)
+
+    Object.assign(userUpdated, data)
+    userUpdated.updatedAt = new Date().toISOString()
+    
+    users.map(user => user.id === Number(id) ? userUpdated : user)
+    
+    saveToDB(users, "users");
+    return userUpdated
+}
+
 export default {
     create,
     findAll,
-    findOne
+    findOne,
+    findByIdAndUpdate
 }

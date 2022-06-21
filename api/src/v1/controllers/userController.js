@@ -59,6 +59,21 @@ export default class UserController {
         }
     }
 
+    async addWishList(req, res) {
+        try {
+            const userData = {
+                userId: req.body.userId,
+                productId: req.body.productId,
+            }
+
+            const updatedUser = await this.userService.addWishList(userData);
+            res.status(200).json(updatedUser);
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ error: err.message })
+        }
+    }
+
     async delete(req, res) {
         try {
             this.userService.deleteUser(req.params.id);

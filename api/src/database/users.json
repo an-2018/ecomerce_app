@@ -4,7 +4,10 @@
     "name": "John",
     "email": "",
     "password": "",
-    "wishlist": [],
+    "wishlist": [
+      1,
+      2
+    ],
     "createdAt": "",
     "updatedAt": ""
   },
@@ -13,8 +16,13 @@
     "name": "Doe",
     "email": "john@doe.com",
     "password": "1234",
-    "wishlist": [],
-    "createdAt": "2022-06-20T23:45:50.319Z"
+    "wishlist": [
+      2,
+      2,
+      1
+    ],
+    "createdAt": "2022-06-20T23:45:50.319Z",
+    "updatedAt": "2022-06-21T00:18:04.957Z"
   },
   {
     "id": 3,

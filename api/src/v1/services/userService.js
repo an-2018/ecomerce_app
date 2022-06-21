@@ -16,9 +16,18 @@ export default class UserService {
         return userStore.findOne(id)
     }
 
+    async addWishList(data) {
+        const user = userStore.findOne(data.userId)
+        if (user.wishlist.includes(data.productId)) {
+            return { error: "Product already in wishlist" }
+        }
+        user.wishlist.push(data.productId)
+        return userStore.findByIdAndUpdate(data.userId, user)
+    }
+
     async update(id, data) {
         // TODO: update user
-        return await User.findByIdAndUpdate(id, data)
+        return await userStore.findByIdAndUpdate(id, data)
     }
 
     async delete(id) {
