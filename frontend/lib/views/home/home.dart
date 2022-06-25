@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
-import 'package:nusabomapp/widgets/product_cart.dart';
+import 'package:nusabomapp/widgets/category_items.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/Product.dart';
+import '../../widgets/product_card.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -80,6 +81,7 @@ class Home extends StatelessWidget {
               controller: textController,
             ),
           ),
+          CategoryItems(),
           Container(
             height: 200,
             width: double.maxFinite,
