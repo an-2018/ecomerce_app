@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
+import 'package:nusabomapp/widgets/image_slides.dart';
 
 import '../../models/Product.dart';
 
 class ProductDetail extends StatelessWidget {
   ProductDetail({Key? key}) : super(key: key);
+  static final images = [
+    "http://placeimg.com/640/480/sports",
+    "http://placeimg.com/640/480/business",
+    "http://placeimg.com/640/480/abstract",
+    "http://placeimg.com/640/480/food"
+  ];
   final Product product = Product(
       id: "id",
       description: "description",
       category: "category",
       details: "details",
       price: 24,
-      gallery: [],
+      gallery: images,
       discountValue: 0,
       hasDiscount: false,
       name: "name");
@@ -21,7 +28,7 @@ class ProductDetail extends StatelessWidget {
       bottomNavigationBar: BottonNavigationWidget(),
       appBar: AppBar(
         title: Center(child: Text("Details")),
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.amber.shade200,
         elevation: 0,
         actions: [
           Container(
@@ -40,9 +47,8 @@ class ProductDetail extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              height: 300,
-              decoration: BoxDecoration(color: Colors.amber),
-            ),
+                color: Colors.amber.shade200,
+                child: ImageSlides(images: product.gallery)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Column(
