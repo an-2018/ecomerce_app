@@ -11,11 +11,7 @@ main() {
     "http://placeimg.com/640/480/food"
   ];
   runApp(MaterialApp(
-    home: Scaffold(
-      body: ImageSlides(
-        images: images,
-      ),
-    ),
+    home: Scaffold(body: Image.network("http://placeimg.com/640/480/sports")),
   ));
 }
 
@@ -32,7 +28,8 @@ class _ImageSlidesState extends State<ImageSlides> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      width: double.maxFinite,
       child: Column(
         children: [
           Stack(
@@ -45,10 +42,12 @@ class _ImageSlidesState extends State<ImageSlides> {
                   return buildImage(urlImage, index);
                 },
                 options: CarouselOptions(
-                  height: 500,
+                  height: 300,
                   autoPlay: true,
-                  viewportFraction: 1,
+                  // viewportFraction: 1,
                   enlargeCenterPage: true,
+                  aspectRatio: 1,
+                  clipBehavior: Clip.hardEdge,
                   onPageChanged: (index, reason) => setState(() {
                     _currentIndex = index;
                   }),
@@ -87,26 +86,38 @@ class _ImageSlidesState extends State<ImageSlides> {
 
   Widget buildImage(String imageUrl, int index) {
     return Container(
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        // color: index % 2 > 0 ? Colors.amber : Colors.blue,
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(
-            imageUrl,
-          ),
-        ),
-      ),
+          // color: index % 2 > 0 ? Colors.amber : Colors.blue,
+          // image: DecorationImage(
+          //   image: CachedNetworkImageProvider(
+          //     imageUrl,
+          //   ),
+          //   fit: BoxFit.contain,
+          // ),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.amber),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        errorWidget: (context, param, _) => Center(
-          child: Icon(
-            Icons.image_search,
-            size: 64,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      child: imageUrl.isEmpty
+          ? Center(
+              child: Icon(
+                Icons.image_search,
+                size: 64,
+                color: Colors.white,
+              ),
+            )
+          : CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: imageUrl,
+              errorWidget: (context, param, _) => Center(
+                child: Icon(
+                  Icons.image_search,
+                  size: 64,
+                  color: Colors.white,
+                ),
+              ),
+            ),
     );
   }
 
@@ -137,7 +148,7 @@ class _ImageSlidesState extends State<ImageSlides> {
       activeIndex: _currentIndex,
       count: widget.images.length,
       effect: ExpandingDotsEffect(
-        activeDotColor: Colors.white,
+        activeDotColor: Colors.amber,
         dotColor: Colors.black.withAlpha(50),
       ),
     );

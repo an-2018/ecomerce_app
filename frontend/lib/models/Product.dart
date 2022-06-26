@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:nusabomapp/models/Cart.dart';
+
 class Product {
-  final String id, name, description, category, details;
+  final String id, name, description, category;
+  final Map<String, dynamic> details;
   final double price;
   final List<String> gallery;
   final double discountValue;
@@ -18,26 +21,26 @@ class Product {
       required this.name});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    final id = json["name"];
+    final id = json["name"] ?? "";
     final name = json["name"] ?? "";
     final description = json["description"] ?? "";
     final category = json["category"] ?? "";
     final details = json["details"] ?? "";
     final price = json["price"] ?? "";
     final gallery = json["gallery"] ?? "";
-    final discountValue = json["discountValue"] ?? "";
+    // final discountValue = json["discountValue"] ?? "";
     final hasDiscount = json["hasDiscount"] ?? "";
 
     return Product(
       id: id,
       name: name,
-      discountValue: discountValue,
+      discountValue: 0, //double.parse(discountValue),
       category: category,
       description: description,
       details: details,
       hasDiscount: hasDiscount,
-      price: price,
-      gallery: gallery,
+      price: double.parse(price),
+      gallery: jsonToList(gallery),
     );
   }
 
@@ -46,4 +49,10 @@ class Product {
       "title": this.name,
     });
   }
+}
+
+List<String> jsonToList(json) {
+  List<String> list = [];
+  json.forEach((value) => list.add(value));
+  return list;
 }

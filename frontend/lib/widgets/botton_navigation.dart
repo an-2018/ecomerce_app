@@ -24,6 +24,15 @@ class _BottonNavigationWidgetState extends State<BottonNavigationWidget> {
         case 1:
           Navigator.of(context).pushNamed(AppRoutes.productDetail);
           break;
+        case 2:
+          Navigator.of(context).pushNamed(AppRoutes.wishlist);
+          break;
+        case 3:
+          Navigator.of(context).pushNamed(AppRoutes.cart);
+          break;
+        case 4:
+          Navigator.of(context).pushNamed(AppRoutes.profile);
+          break;
       }
     });
   }

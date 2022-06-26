@@ -1,3 +1,3 @@
 class AppConfig {
-  static const apiUrl = "";
+  static const apiUrl = "http://localhost:5000";
 }

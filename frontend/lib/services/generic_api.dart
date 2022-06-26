@@ -1,9 +1,9 @@
-abstract class GenericApi<T> {
+abstract class GenericApi<T, V> {
   Future<T> fetchOne(String param) async {
     return Future.value();
   }
 
-  Future<List<T>> fetchList({String? search}) async {
+  Future<V> fetchList({String? search}) async {
     return Future.value();
   }
 }
