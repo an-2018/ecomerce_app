@@ -1,5 +1,5 @@
 import User from '../data/entities/User.js';
-import userStore from "../data/store/userStore.js"
+import userStore from "../data/repository/userStore.js"
 
 export default class UserService {
     async create(data) {

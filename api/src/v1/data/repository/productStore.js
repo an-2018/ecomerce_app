@@ -1,4 +1,4 @@
-import products from "./../../../database/db.json" assert {type: "json"}
+import products from "../../../database/db.json" assert {type: "json"}
 import saveToDB from "../../../utils/db.js";
 
 const create = (product) => {
@@ -8,8 +8,17 @@ const create = (product) => {
     return product;
 }
 
-const findAll = () => {
-    return products;
+const findAll = ({ page = 1, limit = 10 }) => {
+    console.log("page", page, "limit", limit)
+    let list = []
+    let startPosition = page * limit - limit
+    for (let i = startPosition; i < products.length; i++) {
+        if (list.length >= limit) {
+            return list
+        }
+        list.push(products[i])
+    }
+    // return products.filter((index, value) => { console.log(value); return value < limit });
 }
 
 const findOne = (id) => {
@@ -26,7 +35,7 @@ const filterBy = async (query) => {
                     product.name.toLowerCase().includes(query.text.toLowerCase())
                     || product.description.toLowerCase().includes(query.text.toLowerCase())
                     || product.details.adjective.toLowerCase().includes(query.text.toLowerCase())
-                    )
+                )
             }
             if (query.hasDiscount) {
                 result.push(product.hasDiscount === query.hasDiscount)

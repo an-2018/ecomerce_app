@@ -29,10 +29,14 @@ export default class ProductController {
     async getAll(req, res) {
         // TODO: add input validation
         // TODO: add pagination
+        const page = req.query.page || 1
+        const limit = req.query.limit || 10
         try {
-            const products = await this.productService.getAll();
-            res.status(200).json({ products: products });
+            const listPaginated = this.productService.list({ page })
+            const { value } = await listPaginated.next()
+            res.status(200).json({ products: value, page: page, limit: limit });
         } catch (err) {
+            console.log(err)
             res.status(500).json({ error: err.message })
         }
     }
@@ -45,6 +49,7 @@ export default class ProductController {
             const product = await this.productService.getById(req.params.id);
             res.status(200).json(product);
         } catch (err) {
+            console.log(err)
             res.status(500).json({ error: err.message })
         }
     }
