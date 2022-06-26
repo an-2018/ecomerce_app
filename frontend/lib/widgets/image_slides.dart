@@ -17,7 +17,9 @@ main() {
 
 class ImageSlides extends StatefulWidget {
   List<String> images;
-  ImageSlides({Key? key, required this.images}) : super(key: key);
+  bool? isMobile;
+  ImageSlides({Key? key, required this.images, this.isMobile})
+      : super(key: key);
 
   @override
   State<ImageSlides> createState() => _ImageSlidesState();
@@ -28,6 +30,70 @@ class _ImageSlidesState extends State<ImageSlides> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    if (widget.isMobile ?? true) {
+      return buildCaroselMobile(context);
+    }
+
+    return Container(
+      width: 300,
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              CarouselSlider.builder(
+                carouselController: _controller,
+                itemCount: widget.images.length,
+                itemBuilder: (context, index, realIndex) {
+                  final urlImage = widget.images[index];
+                  return buildImage(urlImage, index);
+                },
+                options: CarouselOptions(
+                  scrollDirection: Axis.vertical,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  autoPlay: true,
+                  pageSnapping: false,
+                  viewportFraction: 0.3,
+                  enlargeCenterPage: true,
+                  aspectRatio: 1,
+                  clipBehavior: Clip.hardEdge,
+                  disableCenter: true,
+                  onPageChanged: (index, reason) => setState(() {
+                    _currentIndex = index;
+                  }),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: buildButton(previousImage, Icons.arrow_back_ios,
+                      Alignment.centerLeft, Alignment.centerRight),
+                ),
+              ),
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: Center(
+                  child: buildButton(nextImage, Icons.arrow_forward_ios,
+                      Alignment.centerRight, Alignment.centerLeft),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          buildIndicators(),
+          SizedBox(
+            height: 16,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCaroselMobile(BuildContext context) {
     return Container(
       width: double.maxFinite,
       child: Column(
@@ -42,9 +108,11 @@ class _ImageSlidesState extends State<ImageSlides> {
                   return buildImage(urlImage, index);
                 },
                 options: CarouselOptions(
+                  scrollDirection: Axis.horizontal,
                   height: 300,
                   autoPlay: true,
-                  // viewportFraction: 1,
+                  pageSnapping: false,
+                  viewportFraction: 0.5,
                   enlargeCenterPage: true,
                   aspectRatio: 1,
                   clipBehavior: Clip.hardEdge,
@@ -86,6 +154,9 @@ class _ImageSlidesState extends State<ImageSlides> {
 
   Widget buildImage(String imageUrl, int index) {
     return Container(
+      constraints: BoxConstraints(
+        maxWidth: 300,
+      ),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           // color: index % 2 > 0 ? Colors.amber : Colors.blue,
@@ -97,8 +168,44 @@ class _ImageSlidesState extends State<ImageSlides> {
           // ),
           borderRadius: BorderRadius.circular(16),
           color: Colors.amber),
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      height: 300,
+      child: imageUrl.isEmpty
+          ? Center(
+              child: Icon(
+                Icons.image_search,
+                size: 64,
+                color: Colors.white,
+              ),
+            )
+          : CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: imageUrl,
+              errorWidget: (context, param, _) => Center(
+                child: Icon(
+                  Icons.image_search,
+                  size: 64,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+    );
+  }
+
+  Widget buildImageMobile(String imageUrl, int index) {
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+          // color: index % 2 > 0 ? Colors.amber : Colors.blue,
+          // image: DecorationImage(
+          //   image: CachedNetworkImageProvider(
+          //     imageUrl,
+          //   ),
+          //   fit: BoxFit.contain,
+          // ),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.amber),
+      height: 400,
+      width: 400,
       child: imageUrl.isEmpty
           ? Center(
               child: Icon(

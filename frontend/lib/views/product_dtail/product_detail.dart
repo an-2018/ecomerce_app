@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/constants/app_text.dart';
+import 'package:nusabomapp/layout/app_adaptive_layout.dart';
+import 'package:nusabomapp/views/product_dtail/components/product_detail_desktop.dart';
+import 'package:nusabomapp/views/product_dtail/components/product_detail_mobile.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
 import 'package:nusabomapp/widgets/custom_error_widget.dart';
 import 'package:nusabomapp/widgets/image_slides.dart';
@@ -9,137 +12,33 @@ import '../../models/Product.dart';
 import '../../view_models/products_provider.dart';
 
 class ProductDetail extends StatefulWidget {
-  ProductDetail({Key? key}) : super(key: key);
-  static final images = [
-    "http://placeimg.com/640/480/sports",
-    "http://placeimg.com/640/480/business",
-    "http://placeimg.com/640/480/abstract",
-    "http://placeimg.com/640/480/food"
-  ];
+  final String id;
+  ProductDetail({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<ProductDetail> createState() => _ProductDetailState();
+  State<ProductDetail> createState() => ProductDetailState();
 }
 
-class _ProductDetailState extends State<ProductDetail> {
+class ProductDetailState extends State<ProductDetail> {
   late ProductProvider productProvider;
 
   @override
   void initState() {
     productProvider = Provider.of<ProductProvider>(context, listen: false);
-    productProvider.getProduct(id: "1");
+    productProvider.getProduct(id: widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? heading5 = Theme.of(context).textTheme.headline5;
-    final TextStyle? heading6 = Theme.of(context).textTheme.headline6;
-    final TextStyle? body = Theme.of(context).textTheme.bodyLarge;
-    return Scaffold(
-      bottomNavigationBar: BottonNavigationWidget(),
-      appBar: AppBar(
-        title: Center(
-            child: Text(
-          "Details",
-          style: heading5,
-        )),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          Container(
-            width: 48,
-            height: 48,
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(child: Icon(Icons.favorite_border)),
-          )
-        ],
+    return AdaptiveLayout(
+      narrowLayout: ProductDetailMobile(
+        this,
+        id: widget.id,
       ),
-      body: Consumer<ProductProvider>(
-        builder: (context, productProvider, _) {
-          if (productProvider.loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          Product product = productProvider.product;
-
-          return Container(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: ImageSlides(images: product.gallery),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      buildProductHeader(product),
-                      buildProductDescription(product),
-                      buildProductFooterActions(product),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget buildProductHeader(Product product) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            product.name,
-            style: AppText.heading5(context),
-          ),
-          Text("Rating ${product.hasDiscount}")
-        ],
-      ),
-    );
-  }
-
-  Widget buildProductDescription(Product product) {
-    return Container(
-      child: Text(
-        product.description,
-        style: AppText.body(context),
-      ),
-    );
-  }
-
-  Widget buildProductFooterActions(Product product) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "\$ ${product.price}",
-            style: AppText.heading5(context),
-          ),
-          Container(
-            height: 40,
-            width: 120,
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: Colors.amber, borderRadius: BorderRadius.circular(10)),
-            child: Center(
-                child: Text(
-              "Add to Cart Btn",
-              style: AppText.body(context),
-            )),
-          )
-        ],
+      wideLayout: ProductDetailDesktop(
+        this,
+        id: widget.id,
       ),
     );
   }

@@ -34,13 +34,25 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.amber,
         ),
         initialRoute: AppRoutes.home,
-        routes: {
-          AppRoutes.home: (context) => const Home(),
-          AppRoutes.productDetail: (context) => ProductDetail(),
-          AppRoutes.wishlist: (context) => WishList(),
-          AppRoutes.cart: (context) => Cart(),
-          AppRoutes.profile: (context) => Profile()
+        onGenerateRoute: (settings) {
+          if (settings.name == AppRoutes.home) {
+            return MaterialPageRoute(builder: (context) => Home());
+          }
+          var uri = Uri.parse(settings.name as String);
+          if (uri.pathSegments.length == 2 &&
+              uri.pathSegments.first == AppRoutes.productDetail) {
+            var id = uri.pathSegments[1];
+            print("ID: $id");
+            return MaterialPageRoute(
+                builder: (context) => ProductDetail(id: id));
+          }
         },
+        // routes: {
+        //   AppRoutes.home: (context) => const Home(),
+        //   AppRoutes.wishlist: (context) => WishList(),
+        //   AppRoutes.cart: (context) => Cart(),
+        //   AppRoutes.profile: (context) => Profile()
+        // },
       ),
     );
   }

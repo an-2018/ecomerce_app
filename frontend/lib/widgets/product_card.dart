@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -18,35 +19,52 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: InkWell(
-        onTap: () => {print("tap product")},
-        child: Container(
-          width: 200,
-          height: 300,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(color: Colors.black),
+    return InkWell(
+      onTap: action,
+      child: Container(
+        width: 200,
+        height: 300,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: CachedNetworkImageProvider(mainImage))),
+                clipBehavior: Clip.hardEdge,
+                child: Center(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: mainImage,
+                  ),
+                ),
               ),
-              Text(title),
-              Text(rating),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Container(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(price),
-                  ElevatedButton(
-                      onPressed: () => action, child: Text("Add Cart"))
+                  Text(title),
+                  Text(rating),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(price),
+                      ElevatedButton(
+                          onPressed: () => action, child: Text("Add Cart"))
+                    ],
+                  ),
                 ],
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

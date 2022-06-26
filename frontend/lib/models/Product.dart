@@ -21,7 +21,7 @@ class Product {
       required this.name});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    final id = json["name"] ?? "";
+    final id = json["id"] ?? "";
     final name = json["name"] ?? "";
     final description = json["description"] ?? "";
     final category = json["category"] ?? "";

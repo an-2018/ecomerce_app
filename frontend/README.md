@@ -1,10 +1,29 @@
 # NusaBomApp
 
 ## The concept
+An e-commerce app build for web and mobile, with the following features
+- List products from an api
+- Add products to favorites list
+- Add products to cart
+- Search for products by name and other fields
 
 ## Design
+Inspired on designs from dribble and Behance, some of the links bellow:
+- https://www.behance.net/gallery/135792591/eCommerce-app?tracking_source=search_projects%7CE%20COMMERCE%20app
+- https://www.behance.net/gallery/140855537/NFTs-Platform
+- https://dribbble.com/shots/18206861-Artello-Creative-NFT-Ecommerce-Auction-App
 
 ## How to run
+- Clone the repo and grab the flutter dependencies by running:
+```bash
+git clone  <repo-link>
+cd frontend
+flutter pub get
+flutter run -d chrome --web-renderer html
+```
+> Flag html so that some images get rendered by the flutter html render due to problems with CORS
+
+- Otherwise use an IDE to build the APK for the android app version
 
 ## Resources used
 - Packages
