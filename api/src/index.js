@@ -8,6 +8,7 @@ app.use(cors())
 const PORT = process.env.PORT || 5000
 
 app.use(express.json())
+app.use('/', (req, res) => res.end("Hello, Wellcome!"))
 app.use("/api/v1", router)
 
 app.listen(PORT, () => {
