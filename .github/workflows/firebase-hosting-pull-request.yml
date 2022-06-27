@@ -5,7 +5,7 @@ name: Frontend Build and Deploy to Firebase
 'on': 
   push:
     branches:
-      - main
+      - dev
     # Only on changes to the frontend
     paths:
       - "frontend/**"
