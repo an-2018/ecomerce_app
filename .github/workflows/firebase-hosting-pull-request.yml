@@ -10,6 +10,7 @@ name: Frontend Build and Deploy to Firebase
     paths:
       - "frontend/**"
       - ".github/workflows/firebase-hosting-pull-request.yml"
+      
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
