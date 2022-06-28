@@ -112,7 +112,7 @@ class _ImageSlidesState extends State<ImageSlides> {
                   height: 300,
                   autoPlay: true,
                   pageSnapping: false,
-                  viewportFraction: 0.5,
+                  viewportFraction: 0.7,
                   enlargeCenterPage: true,
                   aspectRatio: 1,
                   clipBehavior: Clip.hardEdge,

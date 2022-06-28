@@ -27,6 +27,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -63,7 +64,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Container(height: 650, child: buildProductList(context)),
+                    Container(height: 700, child: buildProductList(context)),
                     Container(
                       height: 40,
                       width: 120,
@@ -126,11 +127,23 @@ class _HomeDesktopState extends State<HomeDesktop> {
           height: 16,
         ),
         Container(
-          width: 120,
-          height: 40,
+          width: 170,
+          height: 50,
           child: ElevatedButton(
             onPressed: () => print("Impelement me"),
-            child: Text("Get started"),
+            child: Row(
+              children: [
+                Icon(Icons.android),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                    child: Text(
+                  "Download App",
+                  style: AppText.body(context),
+                )),
+              ],
+            ),
           ),
         )
       ],

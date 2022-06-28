@@ -4,11 +4,14 @@ import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/constants/app_text.dart';
 import 'package:nusabomapp/models/Product.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
+import 'package:nusabomapp/view_models/search_products_provider.dart';
 import 'package:nusabomapp/views/home/components/product_list.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
 import 'package:nusabomapp/widgets/category_items.dart';
 import 'package:nusabomapp/widgets/custom_error_widget.dart';
 import 'package:nusabomapp/widgets/product_card.dart';
+import 'package:nusabomapp/widgets/search_bar_widget.dart';
+import 'package:nusabomapp/widgets/search_bar_widget_mobile.dart';
 import 'package:provider/provider.dart';
 
 class HomeMobile extends StatefulWidget {
@@ -22,10 +25,12 @@ class _HomeMobileState extends State<HomeMobile> {
   List<int> data = [];
   int currentLength = 0;
   late ProductProvider productProvider;
+  late SearchProductProvider searchProvider;
 
   @override
   void initState() {
     productProvider = Provider.of<ProductProvider>(context, listen: false);
+    searchProvider = Provider.of<SearchProductProvider>(context, listen: false);
     productProvider.list();
     super.initState();
   }
@@ -74,15 +79,27 @@ class _HomeMobileState extends State<HomeMobile> {
                           isLoading: provider.loading,
                           onEndOfPage: () => provider.list(),
                           scrollDirection: Axis.vertical,
-                          child: Column(
+                          child: Stack(
                             children: [
-                              buildSearchBar(),
-                              CategoryItems(),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: ProductListWidget(
-                                      productProvider: productProvider),
+                              Container(
+                                height: 100,
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                child: buildSearchBar(),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top: 100),
+                                child: Column(
+                                  children: [
+                                    CategoryItems(),
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: ProductListWidget(
+                                            productProvider: productProvider),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -207,6 +224,7 @@ class _HomeMobileState extends State<HomeMobile> {
     TextEditingController textController = TextEditingController();
     textController.value = TextEditingValue(text: "Search product");
 
+    return SearchBarWidgetMobile(searchProvider: searchProvider);
     return Container(
       padding: EdgeInsets.all(16),
       child: TextField(

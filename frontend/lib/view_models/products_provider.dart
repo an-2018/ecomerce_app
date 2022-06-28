@@ -31,6 +31,7 @@ class ProductProvider with ChangeNotifier {
   }
 
   list() async {
+    print("Product Provider");
     try {
       loading = true;
       int nextPage = ++currentPage;
@@ -40,7 +41,8 @@ class ProductProvider with ChangeNotifier {
       currentPage = productList.page;
     } catch (e) {
       hasError = true;
-      print(e);
+
+      print("PROVIDER ERROR:$e");
     }
     loading = false;
     notifyListeners();

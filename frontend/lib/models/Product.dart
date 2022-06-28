@@ -25,14 +25,15 @@ class Product {
     final name = json["name"] ?? "";
     final description = json["description"] ?? "";
     final category = json["category"] ?? "";
-    final details = json["details"] ?? "";
-    final price = json["price"] ?? "";
-    final gallery = json["gallery"] ?? "";
+    final details = <String, dynamic>{}; //json["details"] ?? {};
+    final price = json["price"] ?? "0";
+    final gallery = json["gallery"] ?? [];
     // final discountValue = json["discountValue"] ?? "";
-    final hasDiscount = json["hasDiscount"] ?? "";
 
-    return Product(
-      id: id,
+    final hasDiscount = json["hasDiscount"] ?? false;
+
+    final product = Product(
+      id: id.toString(),
       name: name,
       discountValue: 0, //double.parse(discountValue),
       category: category,
@@ -42,6 +43,7 @@ class Product {
       price: double.parse(price),
       gallery: jsonToList(gallery),
     );
+    return product;
   }
 
   String toJson() {

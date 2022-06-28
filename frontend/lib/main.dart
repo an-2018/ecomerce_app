@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
+import 'package:nusabomapp/view_models/search_products_provider.dart';
 import 'package:nusabomapp/views/cart/cart.dart';
 import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/views/product_dtail/product_detail.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(
         create: (_) => ProductProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => SearchProductProvider(),
+      ),
     ];
 
     return MultiProvider(
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.amber,
         ),
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.productDetail,
         onGenerateRoute: (settings) {
           if (settings.name == AppRoutes.home) {
             return MaterialPageRoute(builder: (context) => Home());

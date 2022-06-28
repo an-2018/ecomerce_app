@@ -25,8 +25,9 @@ class ProductApi implements GenericApi<Product, ProductList> {
   @override
   Future<ProductList> fetchList({String? search, int? nextPage}) async {
     ProductList products;
+
     try {
-      uri = Uri.parse("$_connectionString/?page=$nextPage");
+      uri = Uri.parse("$_connectionString/?page=${nextPage.toString()}");
       final response = await http.get(uri, headers: getHeaders);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         products = ProductList.fromJson(jsonDecode(response.body));
@@ -56,5 +57,26 @@ class ProductApi implements GenericApi<Product, ProductList> {
       throw Exception("Error: Fail to load Product | $ex");
     }
     return product;
+  }
+
+  Future<ProductList> search(String query) async {
+    ProductList products;
+    final uri = Uri.parse('$_connectionString/search');
+    try {
+      String body = json.encode({
+        "text": query,
+      });
+
+      final response = await http.post(uri, headers: postHeaders, body: body);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        products = ProductList.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception(
+            "Warning Failed to load data list from API | ${response.reasonPhrase}");
+      }
+    } catch (ex) {
+      throw Exception("Error: Fail to load Products | $ex");
+    }
+    return products;
   }
 }
