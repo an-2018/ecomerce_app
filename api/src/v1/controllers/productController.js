@@ -84,8 +84,9 @@ export default class ProductController {
 
             const result = await this.productService.search(searchQuery)
             console.log(result)
-            res.status(200).json(result);
+            res.status(200).json({ products: result });
         } catch (err) {
+            console.log(err)
             res.status(500).json({ error: err.message })
         }
     }
