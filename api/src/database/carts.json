@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "userId": "1",
+    "items": [
+      {
+        "cartId": 1,
+        "productId": 1,
+        "quantity": 6,
+        "createdAt": "2022-06-28T19:14:53.863Z"
+      },
+      {
+        "cartId": 1,
+        "productId": 2,
+        "quantity": 4,
+        "createdAt": "2022-06-28T19:25:09.035Z"
+      }
+    ],
+    "createdAt": "2022-06-28T19:10:22.434Z",
+    "updatedAt": "2022-06-28T19:25:29.660Z"
+  },
+  {
+    "id": 2,
+    "userId": "1",
+    "items": [],
+    "createdAt": "2022-06-28T19:10:50.695Z"
+  }
+]
