@@ -40,15 +40,16 @@ const filterBy = async (query) => {
                 result.push(product.hasDiscount === query.hasDiscount)
             }
             if (query.minPrice) {
-                result.push(product.price >= query.minPrice)
+                result.push(Number(product.price) >= Number(query.minPrice))
             }
             if (query.maxPrice) {
-                result.push(product.price <= query.maxPrice)
+                console.log(query.maxPrice, product.price)
+                result.push(Number(product.price) <= Number(query.maxPrice))
             }
             if (result.length <= 0) {
                 return false
             }
-            return result.reduce((acc, curr) => acc && curr && result.length < 0)
+            return result.reduce((acc, curr) => acc && curr)
         }
     )
 }

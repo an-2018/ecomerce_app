@@ -22,12 +22,12 @@ An API to get and store data on the e-commerce app.
 ## Features
 - [x]  Filter and search for products by name, adjectives, discounts, price;
 - [x]  Save products in a a wish list of its clients;
-- [ ]  Save selected products to the shopping cart;
+- [x]  Save selected products to the shopping cart;
 - [ ]  Allow users to let comments and make review on products;
 
 ## How to run
 ```bash
-git clone 
+git clone <link to repo>
 npm install
 npm run start 
 npm run dev # if you want to run the app in development mode

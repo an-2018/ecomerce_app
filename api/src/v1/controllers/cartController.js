@@ -1,10 +1,12 @@
 import Cart from "../data/entities/Cart.js";
 import CartItem from "../data/entities/CartItem.js";
 import CartService from "../services/cartService.js";
+import ProductService from "../services/ProductService.js";
 
 export default class CartController {
     constructor() {
         this.cartService = new CartService();
+        this.productService = new ProductService();
     }
 
     async create(req, res) {
@@ -64,6 +66,9 @@ export default class CartController {
                 productId: req.body.productId,
                 quantity: req.body.quantity,
             }
+
+            const product = await this.productService.getById(data.productId + "");
+            data.product = product;
 
             const updatedCartItem = await this.cartService.addToCart(new CartItem(data));
             res.status(200).json(updatedCartItem);

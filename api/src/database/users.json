@@ -19,10 +19,11 @@
     "wishlist": [
       2,
       2,
-      1
+      1,
+      10
     ],
     "createdAt": "2022-06-20T23:45:50.319Z",
-    "updatedAt": "2022-06-21T00:18:04.957Z"
+    "updatedAt": "2022-06-28T19:43:59.535Z"
   },
   {
     "id": 3,
@@ -31,5 +32,13 @@
     "password": "1234",
     "wishlist": [],
     "createdAt": "2022-06-20T23:45:52.288Z"
+  },
+  {
+    "id": 4,
+    "name": "Doe",
+    "email": "john@doe.com",
+    "password": "1234",
+    "wishlist": [],
+    "createdAt": "2022-06-28T19:43:21.361Z"
   }
 ]
