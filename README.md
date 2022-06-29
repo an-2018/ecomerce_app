@@ -11,10 +11,17 @@ A full stack e-commerce app, with a REST API in Node.js and a frontend in Flutte
 ## How to run
 Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` to run the frontend app.
 
-## Features - Frontend
+## Features - Frontend Mobile
 - [x]  List products;
 - [x]  Filter and search for products by name, adjectives, discounts, price;
 - [x]  Save selected products to the shopping cart;
+- [x]  Save products in a a wish list of its clients;
+- [ ]  Allow users to let comments and make review on products;
+
+## Features - Frontend Web
+- [x]  List products;
+- [ ]  Filter and search for products by name, adjectives, discounts, price;
+- [ ]  Save selected products to the shopping cart;
 - [ ]  Save products in a a wish list of its clients;
 - [ ]  Allow users to let comments and make review on products;
 
