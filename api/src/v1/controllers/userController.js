@@ -1,6 +1,6 @@
 import User from "../data/entities/User.js";
 import UserService from "../services/userService.js";
-import ProductService from "../services/ProductService.js";
+import ProductService from "../services/productService.js";
 
 export default class UserController {
     constructor() {
