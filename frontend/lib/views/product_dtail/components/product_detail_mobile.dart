@@ -28,63 +28,66 @@ class ProductDetailMobile extends StatefulWidget {
 class _ProductDetailMobileState extends State<ProductDetailMobile> {
   @override
   Widget build(BuildContext context) {
-    final TextStyle? heading5 = Theme.of(context).textTheme.headline5;
-    final TextStyle? heading6 = Theme.of(context).textTheme.headline6;
-    final TextStyle? body = Theme.of(context).textTheme.bodyLarge;
-    return Scaffold(
-      bottomNavigationBar: BottonNavigationWidget(),
-      appBar: AppBar(
-        title: Center(
-            child: Text(
-          "Details",
-          style: heading5,
-        )),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          Container(
-            width: 48,
-            height: 48,
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(child: Icon(Icons.favorite_border)),
-          )
-        ],
-      ),
-      body: Consumer<ProductProvider>(
-        builder: (context, productProvider, _) {
-          if (productProvider.loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+    return Consumer<ProductProvider>(
+      builder: (context, provider, _) => Scaffold(
+        bottomNavigationBar: BottonNavigationWidget(),
+        appBar: AppBar(
+          title: Center(
+              child: Text(
+            "Details",
+            style: AppText.heading5(context),
+          )),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            Container(
+              width: 48,
+              height: 48,
+              margin: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: IconButton(
+                onPressed: () =>
+                    widget.controller.addToWishList(provider.product),
+                icon: Icon(Icons.favorite_border),
+              ),
+            )
+          ],
+        ),
+        body: Consumer<ProductProvider>(
+          builder: (context, productProvider, _) {
+            if (productProvider.loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-          Product product = productProvider.product;
+            Product product = productProvider.product;
 
-          return Container(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: ImageSlides(images: product.gallery),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      buildProductHeader(product),
-                      buildProductDescription(product),
-                      buildProductFooterActions(product),
-                    ],
+            return Container(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: ImageSlides(images: product.gallery),
                   ),
-                )
-              ],
-            ),
-          );
-        },
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        buildProductHeader(product),
+                        buildProductDescription(product),
+                        buildProductFooterActions(product),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -124,15 +127,16 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
           ),
           Container(
             height: 40,
-            width: 120,
-            padding: EdgeInsets.all(8),
+            width: 150,
             decoration: BoxDecoration(
                 color: Colors.amber, borderRadius: BorderRadius.circular(10)),
-            child: Center(
-                child: Text(
-              "Add to Cart Btn",
-              style: AppText.body(context),
-            )),
+            child: ElevatedButton(
+              onPressed: () => widget.controller.addToCart(product),
+              child: Text(
+                "Add to Cart Btn",
+                style: AppText.body(context),
+              ),
+            ),
           )
         ],
       ),

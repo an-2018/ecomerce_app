@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
     final TextStyle? heading6 = Theme.of(context).textTheme.headline6;
     final TextStyle? body = Theme.of(context).textTheme.bodyLarge;
     final user = User(
-      id: "id",
+      id: 1,
       email: "email",
       wishList: [],
       name: "name",

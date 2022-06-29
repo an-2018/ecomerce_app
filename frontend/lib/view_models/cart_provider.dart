@@ -28,4 +28,12 @@ class CartProvider with ChangeNotifier {
     loading = false;
     notifyListeners();
   }
+
+  getCart({required int id}) async {
+    loading = true;
+    cart = await _api.fetchOne(id);
+
+    loading = false;
+    notifyListeners();
+  }
 }

@@ -35,7 +35,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
         actions: [
           Center(
             child: TextButton(
-              onPressed: () => {print("Implement me")},
+              onPressed: () => {print("To Be Implemented")},
               child: Text(
                 "Products",
                 style: AppText.heading6(context),
@@ -71,7 +71,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                       height: 40,
                       width: 120,
                       child: ElevatedButton(
-                          onPressed: () => {print("implement me")},
+                          onPressed: () => {print("To Be Implemented")},
                           child: Text("View More")),
                     ),
                     SizedBox(
@@ -132,7 +132,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           width: 170,
           height: 50,
           child: ElevatedButton(
-            onPressed: () => print("Impelement me"),
+            onPressed: () => print("To Be Implemented"),
             child: Row(
               children: [
                 Icon(Icons.android),

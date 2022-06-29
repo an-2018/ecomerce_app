@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:nusabomapp/models/Product.dart';
+
 class User {
-  final String id, name, email;
-  final List<String> wishList;
+  final String name, email;
+  final int id;
+  final List<Product> wishList;
 
   User(
       {required this.id,
@@ -11,17 +14,23 @@ class User {
       required this.name});
 
   factory User.fromJson(Map<String, dynamic> json) {
-    final id = json["name"];
-    final name = json["name"] ?? "";
-    final email = json["email"] ?? "";
-    final wishlist = json["wishlist"] ?? "";
+    try {
+      final id = json["id"];
+      final name = json["name"] ?? "";
+      final email = json["email"] ?? "";
+      final wishlist = json["wishlist"] ?? [];
 
-    return User(
-      id: id,
-      name: name,
-      email: email,
-      wishList: wishlist,
-    );
+      final items = jsonToList(wishlist);
+
+      return User(
+        id: id,
+        name: name,
+        email: email,
+        wishList: items,
+      );
+    } catch (e) {
+      throw Exception("Error Convertin user $e");
+    }
   }
 
   String toJson() {
@@ -32,4 +41,10 @@ class User {
       "id": this.id,
     });
   }
+}
+
+List<Product> jsonToList(json) {
+  List<Product> list = [];
+  json.forEach((value) => list.add(Product.fromJson(value)));
+  return list;
 }

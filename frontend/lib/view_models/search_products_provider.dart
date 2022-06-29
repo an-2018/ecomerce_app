@@ -54,7 +54,6 @@ class SearchProductProvider with ChangeNotifier {
       products = productList.products;
     } catch (e) {
       hasError = true;
-      print(e);
     }
     loading = false;
     notifyListeners();

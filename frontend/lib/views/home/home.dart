@@ -45,7 +45,6 @@ class HomeController extends State<Home> {
   }
 
   addToCart(Product product) {
-    print(product);
     CartItem item =
         CartItem(productId: int.parse(product.id), quantity: 1, product: null);
     cartProvider.addToCart(item: item);

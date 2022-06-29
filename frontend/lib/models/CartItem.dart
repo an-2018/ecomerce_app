@@ -15,19 +15,23 @@ class CartItem {
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
-    final id = json["id"] ?? 0;
-    final cartId = json["cartId"] ?? 0;
-    final productId = json["productId"] ?? 0;
-    final quantity = json["quantity"] ?? 0;
-    final product = Product.fromJson(json["product"]);
+    try {
+      final id = json["id"] ?? 0;
+      final cartId = json["cartId"] ?? 0;
+      final productId = json["productId"] ?? 0;
+      final quantity = json["quantity"] ?? 0;
+      final product = Product.fromJson(json["product"] ?? <String, dynamic>{});
 
-    final item = CartItem(
-        id: id,
-        cartId: cartId,
-        productId: productId,
-        quantity: quantity,
-        product: product);
-    return item;
+      final item = CartItem(
+          id: id,
+          cartId: cartId,
+          productId: productId,
+          quantity: quantity,
+          product: product);
+      return item;
+    } catch (e) {
+      throw Exception("Error Converting Cart Item $e");
+    }
   }
 
   String toJson() {

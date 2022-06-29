@@ -21,7 +21,7 @@ class ProductCardHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: InkWell(
-        onTap: () => {print("tap product")},
+        onTap: () => {print("To Be Implemented")},
         child: Container(
           height: 120,
           padding: EdgeInsets.all(16),

@@ -21,9 +21,8 @@ class ProductListWidget extends StatelessWidget {
           .map(
             (product) => ProductCard(
               addToCartAction: () => homeController.addToCart(product),
-              goToDetailAction: () {},
-              // goToDetailAction: () => Navigator.pushNamed(
-              //     context, "${AppRoutes.productDetail}/${product.id}"),
+              goToDetailAction: () => Navigator.pushNamed(
+                  context, "${AppRoutes.productDetail}/${product.id}"),
               title: product.name,
               mainImage: product.gallery[0],
               price: "${product.price}",

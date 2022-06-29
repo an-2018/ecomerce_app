@@ -3,6 +3,7 @@ import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/view_models/cart_provider.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
 import 'package:nusabomapp/view_models/search_products_provider.dart';
+import 'package:nusabomapp/view_models/user_provider.dart';
 import 'package:nusabomapp/views/cart/cart.dart';
 import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/views/product_dtail/product_detail.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(
         create: (_) => CartProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => UserProvider(),
+      ),
     ];
 
     return MultiProvider(
@@ -49,11 +53,16 @@ class MyApp extends StatelessWidget {
           if (settings.name == AppRoutes.cart) {
             return MaterialPageRoute(builder: (context) => Cart());
           }
+          if (settings.name == AppRoutes.wishlist) {
+            return MaterialPageRoute(builder: (context) => WishList());
+          }
+          if (settings.name == AppRoutes.profile) {
+            return MaterialPageRoute(builder: (context) => Profile());
+          }
           var uri = Uri.parse(settings.name as String);
           if (uri.pathSegments.length == 2 &&
               uri.pathSegments.first == AppRoutes.productDetail) {
             var id = uri.pathSegments[1];
-            print("ID: $id");
             return MaterialPageRoute(
                 builder: (context) => ProductDetail(id: id));
           }

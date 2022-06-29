@@ -22,6 +22,7 @@ class _CartMobileState extends State<CartMobile> {
   void initState() {
     cartProvider = Provider.of<CartProvider>(context, listen: false);
     productProvider = Provider.of<ProductProvider>(context, listen: false);
+    cartProvider.getCart(id: 1);
     super.initState();
   }
 
@@ -53,7 +54,6 @@ class _CartMobileState extends State<CartMobile> {
       body: Consumer<CartProvider>(builder: (context, provider, _) {
         List<CartItem>? items =
             provider.cart != null ? provider.cart?.cartItems : [];
-        print("${items?.length}");
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Stack(
@@ -89,17 +89,10 @@ class _CartMobileState extends State<CartMobile> {
   }
 
   List<Widget> buildProductList(List<CartItem> items) {
-    print("get products");
     List<Widget> productList = [];
-    // Future.forEach(items, (CartItem item) async {
-    //   print("productid : ${item.productId}");
-    //   Product product =
-    //       await productProvider.getProduct(id: item.productId.toString());
-    //   products.add(product);
-    // });
-    // print("produc list : ${products.length}");
+
     for (int i = 0; i < items.length; i++) {
-      Product? product = items[i].product;
+      Product product = items[i].product as Product;
       if (product != null) {
         final widget = Padding(
           padding: EdgeInsets.only(bottom: 16),
@@ -108,7 +101,7 @@ class _CartMobileState extends State<CartMobile> {
             price: product.price.toString(),
             mainImage: product.gallery[0],
             description: product.description,
-            action: () => {print("Implement me")},
+            action: () => {print("To Be Implemented")},
           ),
         );
         productList.add(widget);

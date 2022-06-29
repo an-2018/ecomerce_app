@@ -68,7 +68,7 @@ class _ProductDetailDesktopState extends State<ProductDetailDesktop> {
         ),
         Center(
           child: TextButton(
-            onPressed: () => {print("Implement me")},
+            onPressed: () => {print("To Be Implemented")},
             child: Text(
               "Products",
               style: AppText.heading6(context),
