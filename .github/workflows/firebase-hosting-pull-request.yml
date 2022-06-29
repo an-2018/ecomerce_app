@@ -29,7 +29,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRYON_STAGE_44EDF }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EC_APP_CHALLENGE }}'
           channelId: live
           projectId: ec-app-challenge
-          entrypoint: frontend
