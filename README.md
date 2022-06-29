@@ -10,6 +10,9 @@ Full Stack Ecommerce App Challenge
 A full stack e-commerce app, with a REST API in Node.js and a frontend in Flutter.
 ## How to run
 Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` to run the frontend app.
+## Try it online
+- **Frontend:** TODO:
+- **API:** https://ec-app-challenge.herokuapp.com/
 
 ## Features - Frontend Mobile
 - [x]  List products;
