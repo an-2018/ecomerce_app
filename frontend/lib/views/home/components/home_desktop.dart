@@ -3,11 +3,13 @@ import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/constants/app_text.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
 import 'package:nusabomapp/views/home/components/product_list.dart';
+import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/widgets/product_card.dart';
 import 'package:provider/provider.dart';
 
 class HomeDesktop extends StatefulWidget {
-  const HomeDesktop({Key? key}) : super(key: key);
+  final HomeController controller;
+  const HomeDesktop(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<HomeDesktop> createState() => _HomeDesktopState();
@@ -171,7 +173,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
           .take(6)
           .map(
             (product) => ProductCard(
-              action: () => Navigator.pushNamed(
+              addToCartAction: () => widget.controller.addToCart(product),
+              goToDetailAction: () => Navigator.pushNamed(
                   context, "${AppRoutes.productDetail}/${product.id}"),
               title: product.name,
               mainImage: product.gallery[0],

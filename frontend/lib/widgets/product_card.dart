@@ -6,21 +6,23 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String mainImage;
   final String rating;
-  final Function() action;
+  final Function() goToDetailAction;
+  final Function() addToCartAction;
 
-  const ProductCard(
-      {Key? key,
-      required this.title,
-      required this.price,
-      required this.mainImage,
-      required this.rating,
-      required this.action})
-      : super(key: key);
+  const ProductCard({
+    Key? key,
+    required this.title,
+    required this.price,
+    required this.mainImage,
+    required this.rating,
+    required this.goToDetailAction,
+    required this.addToCartAction,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: action,
+      onTap: goToDetailAction,
       child: Container(
         width: 200,
         height: 300,
@@ -58,7 +60,8 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(price),
                       ElevatedButton(
-                          onPressed: () => action, child: Text("Add Cart"))
+                          onPressed: () => addToCartAction(),
+                          child: Text("Add to Cart"))
                     ],
                   ),
                 ],

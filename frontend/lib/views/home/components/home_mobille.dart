@@ -6,6 +6,7 @@ import 'package:nusabomapp/models/Product.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
 import 'package:nusabomapp/view_models/search_products_provider.dart';
 import 'package:nusabomapp/views/home/components/product_list.dart';
+import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
 import 'package:nusabomapp/widgets/category_items.dart';
 import 'package:nusabomapp/widgets/custom_error_widget.dart';
@@ -15,7 +16,8 @@ import 'package:nusabomapp/widgets/search_bar_widget_mobile.dart';
 import 'package:provider/provider.dart';
 
 class HomeMobile extends StatefulWidget {
-  const HomeMobile({Key? key}) : super(key: key);
+  final HomeController controller;
+  const HomeMobile(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<HomeMobile> createState() => _HomeMobileState();
@@ -37,24 +39,6 @@ class _HomeMobileState extends State<HomeMobile> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? heading5 = Theme.of(context).textTheme.headline5;
-    final TextStyle? heading6 = Theme.of(context).textTheme.headline6;
-    final TextStyle? body = Theme.of(context).textTheme.bodyLarge;
-
-    List<Product> productList = [
-      Product(
-        name: "Rosato men shirt",
-        id: '1',
-        description: 'Description',
-        details: <String, String>{"adjective": "value"},
-        discountValue: 10,
-        category: 'category',
-        price: 10,
-        hasDiscount: false,
-        gallery: [],
-      ),
-    ];
-
     return Scaffold(
       appBar: buildAppaBar(),
       bottomNavigationBar: const BottonNavigationWidget(),
@@ -71,7 +55,7 @@ class _HomeMobileState extends State<HomeMobile> {
                     }
 
                     if (productProvider.hasError) {
-                      return CustomErrorWidget();
+                      return Center(child: CustomErrorWidget());
                     }
 
                     return Expanded(
@@ -96,7 +80,9 @@ class _HomeMobileState extends State<HomeMobile> {
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 16),
                                         child: ProductListWidget(
-                                            productProvider: productProvider),
+                                          productProvider: productProvider,
+                                          homeController: widget.controller,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -233,23 +219,23 @@ class _HomeMobileState extends State<HomeMobile> {
     );
   }
 
-  Widget buildProductList(ProductProvider productProvider) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      children: productProvider.products
-          .map(
-            (product) => ProductCard(
-              action: () => Navigator.pushNamed(
-                  context, "${AppRoutes.productDetail}/${product.id}"),
-              title: product.name,
-              mainImage: product.gallery[0],
-              price: "${product.price}",
-              rating: '',
-            ),
-          )
-          .toList() as List<Widget>,
-    );
-  }
+  // Widget buildProductList(ProductProvider productProvider) {
+  //   return GridView.count(
+  //     crossAxisCount: 2,
+  //     mainAxisSpacing: 16,
+  //     crossAxisSpacing: 16,
+  //     children: productProvider.products
+  //         .map(
+  //           (product) => ProductCard(
+  //             addToCartAction: () => Navigator.pushNamed(
+  //                 context, "${AppRoutes.productDetail}/${product.id}"),
+  //             title: product.name,
+  //             mainImage: product.gallery[0],
+  //             price: "${product.price}",
+  //             rating: '',
+  //           ),
+  //         )
+  //         .toList() as List<Widget>,
+  //   );
+  // }
 }

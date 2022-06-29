@@ -81,7 +81,7 @@ class WishList extends StatelessWidget {
                             title: product.name,
                             price: product.price.toString(),
                             mainImage: product.gallery[0],
-                            rating: product.details.toString(),
+                            description: product.details.toString(),
                             action: () => {print("Implement me")},
                           ),
                         ),
