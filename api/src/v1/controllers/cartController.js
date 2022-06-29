@@ -1,7 +1,7 @@
 import Cart from "../data/entities/Cart.js";
 import CartItem from "../data/entities/CartItem.js";
 import CartService from "../services/cartService.js";
-import ProductService from "../services/ProductService.js";
+import ProductService from "../services/productService.js";
 
 export default class CartController {
     constructor() {
