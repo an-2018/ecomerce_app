@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:nusabomapp/services/generic_api.dart';
 
 import '../models/Product.dart';
 import '../services/product_api.dart';

@@ -1,3 +1,3 @@
 class AppConfig {
-  static const apiUrl = "http://localhost:5000";
+  static const apiUrl = "https://ec-app-challenge.herokuapp.com";
 }

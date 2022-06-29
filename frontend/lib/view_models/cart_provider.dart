@@ -1,13 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/models/Cart.dart';
 import 'package:nusabomapp/models/CartItem.dart';
 import 'package:nusabomapp/services/cart_api.dart';
-import 'package:nusabomapp/services/generic_api.dart';
-
-import '../models/Product.dart';
-import '../services/product_api.dart';
 
 class CartProvider with ChangeNotifier {
   bool loading = false;
