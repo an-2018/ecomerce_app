@@ -1,9 +1,11 @@
 import User from "../data/entities/User.js";
 import UserService from "../services/userService.js";
+import ProductService from "../services/ProductService.js";
 
 export default class UserController {
     constructor() {
         this.userService = new UserService();
+        this.productService = new ProductService();
     }
 
     async create(req, res) {
@@ -65,6 +67,10 @@ export default class UserController {
                 userId: req.body.userId,
                 productId: req.body.productId,
             }
+
+
+            const product = await this.productService.getById(userData.productId + "");
+            userData.product = product;
 
             const updatedUser = await this.userService.addWishList(userData);
             res.status(200).json(updatedUser);
