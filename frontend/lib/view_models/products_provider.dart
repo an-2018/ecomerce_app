@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:nusabomapp/services/generic_api.dart';
 
 import '../models/Product.dart';
 import '../services/product_api.dart';
@@ -40,7 +37,6 @@ class ProductProvider with ChangeNotifier {
       currentPage = productList.page;
     } catch (e) {
       hasError = true;
-      print(e);
     }
     loading = false;
     notifyListeners();

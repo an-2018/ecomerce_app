@@ -21,27 +21,34 @@ class Product {
       required this.name});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    final id = json["id"] ?? "";
-    final name = json["name"] ?? "";
-    final description = json["description"] ?? "";
-    final category = json["category"] ?? "";
-    final details = json["details"] ?? "";
-    final price = json["price"] ?? "";
-    final gallery = json["gallery"] ?? "";
-    // final discountValue = json["discountValue"] ?? "";
-    final hasDiscount = json["hasDiscount"] ?? "";
+    try {
+      final id = json["id"] ?? "";
+      final name = json["name"] ?? "";
+      final description = json["description"] ?? "";
+      final category = json["category"] ?? "";
+      final details = <String, dynamic>{}; //json["details"] ?? {};
+      final price = json["price"] ?? "0";
+      final gallery = json["gallery"] ?? [];
+      // final discountValue = json["discountValue"] ?? "";
 
-    return Product(
-      id: id,
-      name: name,
-      discountValue: 0, //double.parse(discountValue),
-      category: category,
-      description: description,
-      details: details,
-      hasDiscount: hasDiscount,
-      price: double.parse(price),
-      gallery: jsonToList(gallery),
-    );
+      final hasDiscount = json["hasDiscount"] ?? false;
+
+      final product = Product(
+        id: id.toString(),
+        name: name,
+        discountValue: 0,
+        //double.parse(discountValue),
+        category: category,
+        description: description,
+        details: details,
+        hasDiscount: hasDiscount,
+        price: double.parse(price),
+        gallery: jsonToList(gallery),
+      );
+      return product;
+    } catch (e) {
+      throw Exception("Error Converting Product  $e");
+    }
   }
 
   String toJson() {

@@ -1,28 +1,37 @@
 import 'dart:convert';
 
-class CartItem {
-  final String id, cartId, productId;
-  final int quantity;
+import 'package:nusabomapp/models/Product.dart';
 
+class CartItem {
+  int? id, cartId;
+  int productId, quantity;
+  Product? product;
   CartItem({
-    required this.id,
-    required this.cartId,
+    this.id,
+    this.cartId,
     required this.productId,
     required this.quantity,
+    required this.product,
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
-    final id = json["name"];
-    final cartId = json["cartId"] ?? "";
-    final productId = json["productId"] ?? "";
-    final quatity = json["quantity"] ?? "";
+    try {
+      final id = json["id"] ?? 0;
+      final cartId = json["cartId"] ?? 0;
+      final productId = json["productId"] ?? 0;
+      final quantity = json["quantity"] ?? 0;
+      final product = Product.fromJson(json["product"] ?? <String, dynamic>{});
 
-    return CartItem(
-      id: id,
-      cartId: cartId,
-      productId: productId,
-      quantity: quatity,
-    );
+      final item = CartItem(
+          id: id,
+          cartId: cartId,
+          productId: productId,
+          quantity: quantity,
+          product: product);
+      return item;
+    } catch (e) {
+      throw Exception("Error Converting Cart Item $e");
+    }
   }
 
   String toJson() {

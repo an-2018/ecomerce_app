@@ -4,20 +4,25 @@ import 'package:nusabomapp/models/Product.dart';
 
 class ProductList {
   final List<Product> products;
-  final page;
-  final limit;
+  final int page;
+  final int limit;
   ProductList(
       {required this.products, required this.page, required this.limit});
 
   factory ProductList.fromJson(Map<String, dynamic> json) {
     final products = json["products"] ?? [];
-    final page = json["page"];
-    final limit = json["limit"];
-    return ProductList(
-      products: jsonToList(products),
+    final page = json["page"] ?? "1";
+    final limit = json["limit"] ?? 10;
+
+    final productList = jsonToList(products);
+
+    final list = ProductList(
+      products: productList,
       page: int.parse(page),
       limit: limit,
     );
+
+    return list;
   }
 
   String toJson() {
@@ -29,6 +34,10 @@ class ProductList {
 
 List<Product> jsonToList(json) {
   List<Product> list = [];
-  json.forEach((value) => list.add(Product.fromJson(value)));
+  json.forEach((value) {
+    Product product = Product.fromJson(value);
+
+    list.add(product);
+  });
   return list;
 }

@@ -26,11 +26,10 @@ const findOne = (id) => {
 }
 
 const filterBy = async (query) => {
-    console.log(query)
     return await products.filter(
         (product) => {
             let result = []
-            if (query.text) {
+            if (query.text && query.text.length > 0) {
                 result.push(
                     product.name.toLowerCase().includes(query.text.toLowerCase())
                     || product.description.toLowerCase().includes(query.text.toLowerCase())
@@ -41,10 +40,14 @@ const filterBy = async (query) => {
                 result.push(product.hasDiscount === query.hasDiscount)
             }
             if (query.minPrice) {
-                result.push(product.price >= query.minPrice)
+                result.push(Number(product.price) >= Number(query.minPrice))
             }
             if (query.maxPrice) {
-                result.push(product.price <= query.maxPrice)
+                console.log(query.maxPrice, product.price)
+                result.push(Number(product.price) <= Number(query.maxPrice))
+            }
+            if (result.length <= 0) {
+                return false
             }
             return result.reduce((acc, curr) => acc && curr)
         }

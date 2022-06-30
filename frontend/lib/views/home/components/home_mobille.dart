@@ -4,15 +4,20 @@ import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/constants/app_text.dart';
 import 'package:nusabomapp/models/Product.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
+import 'package:nusabomapp/view_models/search_products_provider.dart';
 import 'package:nusabomapp/views/home/components/product_list.dart';
+import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/widgets/botton_navigation.dart';
 import 'package:nusabomapp/widgets/category_items.dart';
 import 'package:nusabomapp/widgets/custom_error_widget.dart';
 import 'package:nusabomapp/widgets/product_card.dart';
+import 'package:nusabomapp/widgets/search_bar_widget.dart';
+import 'package:nusabomapp/widgets/search_bar_widget_mobile.dart';
 import 'package:provider/provider.dart';
 
 class HomeMobile extends StatefulWidget {
-  const HomeMobile({Key? key}) : super(key: key);
+  final HomeController controller;
+  const HomeMobile(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<HomeMobile> createState() => _HomeMobileState();
@@ -22,34 +27,18 @@ class _HomeMobileState extends State<HomeMobile> {
   List<int> data = [];
   int currentLength = 0;
   late ProductProvider productProvider;
+  late SearchProductProvider searchProvider;
 
   @override
   void initState() {
     productProvider = Provider.of<ProductProvider>(context, listen: false);
+    searchProvider = Provider.of<SearchProductProvider>(context, listen: false);
     productProvider.list();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? heading5 = Theme.of(context).textTheme.headline5;
-    final TextStyle? heading6 = Theme.of(context).textTheme.headline6;
-    final TextStyle? body = Theme.of(context).textTheme.bodyLarge;
-
-    List<Product> productList = [
-      Product(
-        name: "Rosato men shirt",
-        id: '1',
-        description: 'Description',
-        details: <String, String>{"adjective": "value"},
-        discountValue: 10,
-        category: 'category',
-        price: 10,
-        hasDiscount: false,
-        gallery: [],
-      ),
-    ];
-
     return Scaffold(
       appBar: buildAppaBar(),
       bottomNavigationBar: const BottonNavigationWidget(),
@@ -66,7 +55,7 @@ class _HomeMobileState extends State<HomeMobile> {
                     }
 
                     if (productProvider.hasError) {
-                      return CustomErrorWidget();
+                      return Center(child: CustomErrorWidget());
                     }
 
                     return Expanded(
@@ -74,15 +63,29 @@ class _HomeMobileState extends State<HomeMobile> {
                           isLoading: provider.loading,
                           onEndOfPage: () => provider.list(),
                           scrollDirection: Axis.vertical,
-                          child: Column(
+                          child: Stack(
                             children: [
-                              buildSearchBar(),
-                              CategoryItems(),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: ProductListWidget(
-                                      productProvider: productProvider),
+                              Container(
+                                height: 100,
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                child: buildSearchBar(),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top: 100),
+                                child: Column(
+                                  children: [
+                                    CategoryItems(),
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: ProductListWidget(
+                                          productProvider: productProvider,
+                                          homeController: widget.controller,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -207,6 +210,7 @@ class _HomeMobileState extends State<HomeMobile> {
     TextEditingController textController = TextEditingController();
     textController.value = TextEditingValue(text: "Search product");
 
+    return SearchBarWidgetMobile(searchProvider: searchProvider);
     return Container(
       padding: EdgeInsets.all(16),
       child: TextField(
@@ -215,23 +219,23 @@ class _HomeMobileState extends State<HomeMobile> {
     );
   }
 
-  Widget buildProductList(ProductProvider productProvider) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      children: productProvider.products
-          .map(
-            (product) => ProductCard(
-              action: () => Navigator.pushNamed(
-                  context, "${AppRoutes.productDetail}/${product.id}"),
-              title: product.name,
-              mainImage: product.gallery[0],
-              price: "${product.price}",
-              rating: '',
-            ),
-          )
-          .toList() as List<Widget>,
-    );
-  }
+  // Widget buildProductList(ProductProvider productProvider) {
+  //   return GridView.count(
+  //     crossAxisCount: 2,
+  //     mainAxisSpacing: 16,
+  //     crossAxisSpacing: 16,
+  //     children: productProvider.products
+  //         .map(
+  //           (product) => ProductCard(
+  //             addToCartAction: () => Navigator.pushNamed(
+  //                 context, "${AppRoutes.productDetail}/${product.id}"),
+  //             title: product.name,
+  //             mainImage: product.gallery[0],
+  //             price: "${product.price}",
+  //             rating: '',
+  //           ),
+  //         )
+  //         .toList() as List<Widget>,
+  //   );
+  // }
 }

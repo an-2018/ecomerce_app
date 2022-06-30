@@ -18,10 +18,17 @@ export default class UserService {
 
     async addWishList(data) {
         const user = userStore.findOne(data.userId)
-        if (user.wishlist.includes(data.productId)) {
-            return { error: "Product already in wishlist" }
+        let isIn = false
+        user.wishlist.forEach(item => {
+            if (Number(item.id) === Number(data.productId)) {
+                isIn = true
+                console.log("is in")
+            }
+        });
+        console.log(isIn)
+        if (!isIn) {
+            user.wishlist.push(data.product)
         }
-        user.wishlist.push(data.productId)
         return userStore.findByIdAndUpdate(data.userId, user)
     }
 

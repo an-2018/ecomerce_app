@@ -955,5 +955,24 @@
     "discountValue": "0.05",
     "hasDiscount": false,
     "createdAt": "2022-06-19T15:05:05.677Z"
+  },
+  {
+    "id": 54,
+    "name": "Handcrafted Frozen Sausages",
+    "price": "723.00",
+    "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+    "gallery": [
+      "http://placeimg.com/640/480/sports",
+      "http://placeimg.com/640/480/business",
+      "http://placeimg.com/640/480/abstract",
+      "http://placeimg.com/640/480/food"
+    ],
+    "details": {
+      "adjective": "Gorgeous",
+      "material": "Concrete"
+    },
+    "discountValue": "0.05",
+    "hasDiscount": false,
+    "createdAt": "2022-06-28T19:36:43.421Z"
   }
 ]

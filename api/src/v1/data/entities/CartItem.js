@@ -1,11 +1,12 @@
 'use strict';
-class CartItem{
-    constructor({id, cartId, productId, quantity, createdAt, updatedAt}){
+export default class CartItem {
+    constructor({ id, cartId, productId, product, quantity, updatedAt }) {
         this.id = id;
         this.cartId = cartId;
         this.productId = productId;
+        this.product = product;
         this.quantity = quantity;
-        this.createdAt = createdAt;
+        this.createdAt = new Date().toISOString();
         this.updatedAt = updatedAt;
     }
 }

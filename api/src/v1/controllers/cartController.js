@@ -1,10 +1,11 @@
-import User from "../data/entities/User.js";
-import UserService from "../services/userService.js";
+import Cart from "../data/entities/Cart.js";
+import CartItem from "../data/entities/CartItem.js";
+import CartService from "../services/cartService.js";
 import ProductService from "../services/productService.js";
 
-export default class UserController {
+export default class CartController {
     constructor() {
-        this.userService = new UserService();
+        this.cartService = new CartService();
         this.productService = new ProductService();
     }
 
@@ -12,13 +13,10 @@ export default class UserController {
         // TODO: add input validation
         try {
             const data = {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                wishlist: req.body.wishlist
+                userId: req.body.userId,
             }
-            const newUser = await this.userService.create(new User(data));
-            res.status(201).json(newUser);
+            const newCart = await this.cartService.create(new Cart(data));
+            res.status(201).json(newCart);
         } catch (err) {
             console.log(err)
             res.status(500).json({ error: err.message })
@@ -29,8 +27,8 @@ export default class UserController {
         // TODO: add input validation
         // TODO: add pagination
         try {
-            const users = await this.userService.getAll();
-            res.status(200).json({ users: users });
+            const carts = await this.cartService.getAll();
+            res.status(200).json({ carts: carts });
         } catch (err) {
             console.log(err)
             res.status(500).json({ error: err.message })
@@ -44,9 +42,9 @@ export default class UserController {
                 res.status(400).json({ error: "Invalid id" })
             }
 
-            const user = await this.userService.getById(id);
+            const cart = await this.cartService.getById(id);
 
-            res.status(200).json(user);
+            res.status(200).json(cart);
         } catch (err) {
             res.status(500).json({ error: err.message })
         }
@@ -54,26 +52,26 @@ export default class UserController {
 
     async update(req, res) {
         try {
-            const updatedUser = await this.userService.updateUser(req.params.id, res.body);
-            res.status(200).json(updatedUser);
+            const updatedCart = await this.cartService.updateUser(req.params.id, res.body);
+            res.status(200).json(updatedCart);
         } catch (err) {
             res.status(500).json({ error: err.message })
         }
     }
 
-    async addWishList(req, res) {
+    async addToCart(req, res) {
         try {
-            const userData = {
-                userId: req.body.userId,
+            const data = {
+                cartId: req.body.cartId,
                 productId: req.body.productId,
+                quantity: req.body.quantity,
             }
 
+            const product = await this.productService.getById(data.productId + "");
+            data.product = product;
 
-            const product = await this.productService.getById(userData.productId + "");
-            userData.product = product;
-
-            const updatedUser = await this.userService.addWishList(userData);
-            res.status(200).json(updatedUser);
+            const updatedCartItem = await this.cartService.addToCart(new CartItem(data));
+            res.status(200).json(updatedCartItem);
         } catch (err) {
             console.log(err)
             res.status(500).json({ error: err.message })
@@ -82,7 +80,7 @@ export default class UserController {
 
     async delete(req, res) {
         try {
-            this.userService.deleteUser(req.params.id);
+            this.cartService.delete(req.params.id);
             res.status(204).json();
         } catch (err) {
             res.status(500).json({ error: err.message })

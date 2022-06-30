@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nusabomapp/constants/app_routes.dart';
+import 'package:nusabomapp/view_models/search_products_provider.dart';
+import 'package:nusabomapp/widgets/search_bar_widget_mobile.dart';
 
 import '../constants/app_colors.dart';
 
@@ -22,6 +24,9 @@ class _BottonNavigationWidgetState extends State<BottonNavigationWidget> {
           Navigator.of(context).pushNamed(AppRoutes.home);
           break;
         case 1:
+          showSearch(
+              context: context,
+              delegate: CustomSearchDelegate(SearchProductProvider()));
           // Navigator.of(context).pushNamed(AppRoutes.productDetail, App);
           break;
         case 2:

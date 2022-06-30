@@ -6,21 +6,23 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String mainImage;
   final String rating;
-  final Function() action;
+  final Function() goToDetailAction;
+  final Function() addToCartAction;
 
-  const ProductCard(
-      {Key? key,
-      required this.title,
-      required this.price,
-      required this.mainImage,
-      required this.rating,
-      required this.action})
-      : super(key: key);
+  const ProductCard({
+    Key? key,
+    required this.title,
+    required this.price,
+    required this.mainImage,
+    required this.rating,
+    required this.goToDetailAction,
+    required this.addToCartAction,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: action,
+      onTap: goToDetailAction,
       child: Container(
         width: 200,
         height: 300,
@@ -34,16 +36,19 @@ class ProductCard extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
                     image: DecorationImage(
+                        fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(mainImage))),
                 clipBehavior: Clip.hardEdge,
-                child: Center(
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: mainImage,
-                  ),
-                ),
+                // child: CachedNetworkImage(
+                //   fit: BoxFit.fitWidth,
+                //   imageUrl: mainImage,
+                // ),
               ),
             ),
             Container(
@@ -58,7 +63,8 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(price),
                       ElevatedButton(
-                          onPressed: () => action, child: Text("Add Cart"))
+                          onPressed: () => addToCartAction(),
+                          child: Text("Add to Cart"))
                     ],
                   ),
                 ],

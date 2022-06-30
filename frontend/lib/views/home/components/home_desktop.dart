@@ -1,13 +1,16 @@
+import 'dart:io' if (dart.library.html) 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/constants/app_text.dart';
 import 'package:nusabomapp/view_models/products_provider.dart';
 import 'package:nusabomapp/views/home/components/product_list.dart';
+import 'package:nusabomapp/views/home/home.dart';
 import 'package:nusabomapp/widgets/product_card.dart';
 import 'package:provider/provider.dart';
 
 class HomeDesktop extends StatefulWidget {
-  const HomeDesktop({Key? key}) : super(key: key);
+  final HomeController controller;
+  const HomeDesktop(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<HomeDesktop> createState() => _HomeDesktopState();
@@ -27,12 +30,13 @@ class _HomeDesktopState extends State<HomeDesktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           Center(
             child: TextButton(
-              onPressed: () => {print("Implement me")},
+              onPressed: () => {print("To Be Implemented")},
               child: Text(
                 "Products",
                 style: AppText.heading6(context),
@@ -63,12 +67,12 @@ class _HomeDesktopState extends State<HomeDesktop> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Container(height: 650, child: buildProductList(context)),
+                    Container(height: 700, child: buildProductList(context)),
                     Container(
                       height: 40,
                       width: 120,
                       child: ElevatedButton(
-                          onPressed: () => {print("implement me")},
+                          onPressed: () => {print("To Be Implemented")},
                           child: Text("View More")),
                     ),
                     SizedBox(
@@ -126,11 +130,23 @@ class _HomeDesktopState extends State<HomeDesktop> {
           height: 16,
         ),
         Container(
-          width: 120,
-          height: 40,
+          width: 170,
+          height: 50,
           child: ElevatedButton(
-            onPressed: () => print("Impelement me"),
-            child: Text("Get started"),
+            onPressed: () => openInNewTab(),
+            child: Row(
+              children: [
+                Icon(Icons.android),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                    child: Text(
+                  "Download App",
+                  style: AppText.body(context),
+                )),
+              ],
+            ),
           ),
         )
       ],
@@ -158,7 +174,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
           .take(6)
           .map(
             (product) => ProductCard(
-              action: () => Navigator.pushNamed(
+              addToCartAction: () => widget.controller.addToCart(product),
+              goToDetailAction: () => Navigator.pushNamed(
                   context, "${AppRoutes.productDetail}/${product.id}"),
               title: product.name,
               mainImage: product.gallery[0],
@@ -168,5 +185,11 @@ class _HomeDesktopState extends State<HomeDesktop> {
           )
           .toList(),
     );
+  }
+
+  openInNewTab() {
+    final url =
+        "https://storage.googleapis.com/ec-challenge-store/app-release.apk";
+    html.window.open(url, 'Android App');
   }
 }
