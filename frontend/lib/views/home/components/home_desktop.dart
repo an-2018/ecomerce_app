@@ -1,3 +1,4 @@
+// import 'dart:io' if (dart.library.html) 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:nusabomapp/constants/app_routes.dart';
 import 'package:nusabomapp/constants/app_text.dart';
@@ -132,7 +133,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           width: 170,
           height: 50,
           child: ElevatedButton(
-            onPressed: () => print("To Be Implemented"),
+            onPressed: () => {}, //openInNewTab(),
             child: Row(
               children: [
                 Icon(Icons.android),
@@ -185,4 +186,10 @@ class _HomeDesktopState extends State<HomeDesktop> {
           .toList(),
     );
   }
+
+  // openInNewTab() {
+  //   final url =
+  //       "https://github.com/an-2018/ecomerce_app/raw/main/frontend/assets/images/hero.jpg";
+  //   html.window.open(url, 'Android App');
+  // }
 }

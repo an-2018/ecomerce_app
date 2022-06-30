@@ -36,16 +36,19 @@ class ProductCard extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
                     image: DecorationImage(
+                        fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(mainImage))),
                 clipBehavior: Clip.hardEdge,
-                child: Center(
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: mainImage,
-                  ),
-                ),
+                // child: CachedNetworkImage(
+                //   fit: BoxFit.fitWidth,
+                //   imageUrl: mainImage,
+                // ),
               ),
             ),
             Container(
