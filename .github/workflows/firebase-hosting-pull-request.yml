@@ -24,7 +24,7 @@ jobs:
           pwd 
           flutter pub get 
           flutter config --enable-web 
-          flutter build web --release
+          flutter build web --web-renderer html --release
           cp -r assets/images build/web/assets/images
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
