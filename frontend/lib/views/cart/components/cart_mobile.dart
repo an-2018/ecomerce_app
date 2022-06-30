@@ -38,18 +38,6 @@ class _CartMobileState extends State<CartMobile> {
         )),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          Container(
-            width: 48,
-            height: 48,
-            margin: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(child: Icon(Icons.favorite_border)),
-          )
-        ],
       ),
       body: Consumer<CartProvider>(builder: (context, provider, _) {
         List<CartItem>? items =
