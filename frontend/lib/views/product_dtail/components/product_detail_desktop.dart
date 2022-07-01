@@ -24,11 +24,12 @@ class ProductDetailDesktop extends StatefulWidget {
 class _ProductDetailDesktopState extends State<ProductDetailDesktop> {
   @override
   Widget build(BuildContext context) {
-    Product product = widget.controller.productProvider.product;
     return Scaffold(
       appBar: buildAppBar(),
       body: Consumer<ProductProvider>(
         builder: (context, productProvider, _) {
+          Product product = productProvider.product;
+
           if (productProvider.loading) {
             return Center(
               child: CircularProgressIndicator(),
