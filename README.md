@@ -6,6 +6,11 @@
 # E-commerce App
 Full Stack Ecommerce App Challenge
 
+<p align="center">
+<img alt="Github language Count" src="https://github.com/an-2018/ecomerce_app/blob/main/.github/workflows/ec-app2.png" />
+</p>
+
+
 ## About
 A full stack e-commerce app, with a REST API in Node.js and a frontend in Flutter.
 ## How to run
@@ -23,6 +28,7 @@ Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` 
 
 ## Features - Frontend Web
 - [x]  List products;
+- [x] List product Detail
 - [ ]  Filter and search for products by name, adjectives, discounts, price;
 - [ ]  Save selected products to the shopping cart;
 - [ ]  Save products in a a wish list of its clients;
@@ -34,6 +40,19 @@ Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` 
 - [x]  Save products in a a wish list of its clients;
 - [ ]  Allow users to let comments and make review on products;
 
+## Trabalhos Futuros | TODO's
+**API**
+- [ ] Nest Implementation (Typescript, OOP, Architeture)
+- [ ] TypeORM and Data Persistence
+- [ ] User AuthN & AuthZ
+- [ ] Unit Test
+
+**Frontend**
+- [ ] User AuthN & AuthZ
+- [ ] Flutter Navigation 2.0
+- [ ] Web and Mobile platform features(select text, darthtml, named urls)
+- [ ] Animations (Rive...)
+- [ ] Theme customization
 
 ## Documentation
 Link to the postman documentation here:
