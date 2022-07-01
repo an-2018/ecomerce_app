@@ -9,7 +9,6 @@ const create = (product) => {
 }
 
 const findAll = ({ page = 1, limit = 10 }) => {
-    console.log("page", page, "limit", limit)
     let list = []
     let startPosition = page * limit - limit
     for (let i = startPosition; i < products.length; i++) {
@@ -18,7 +17,6 @@ const findAll = ({ page = 1, limit = 10 }) => {
         }
         list.push(products[i])
     }
-    // return products.filter((index, value) => { console.log(value); return value < limit });
 }
 
 const findOne = (id) => {
@@ -43,7 +41,6 @@ const filterBy = async (query) => {
                 result.push(Number(product.price) >= Number(query.minPrice))
             }
             if (query.maxPrice) {
-                console.log(query.maxPrice, product.price)
                 result.push(Number(product.price) <= Number(query.maxPrice))
             }
             if (result.length <= 0) {

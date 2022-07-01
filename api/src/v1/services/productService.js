@@ -19,9 +19,7 @@ export default class ProductService {
     }
 
     async getById(id) {
-        console.log("get by id")
         let product = productStore.findOne(id)
-        console.log(product)
         return product
     }
 

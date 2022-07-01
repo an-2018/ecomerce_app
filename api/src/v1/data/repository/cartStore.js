@@ -3,7 +3,6 @@ import saveToDB from "../../../utils/db.js";
 
 const create = (cart) => {
     cart.id = carts.length + 1;
-    console.log(cart)
 
     carts.push(cart);
     saveToDB(carts, "carts");

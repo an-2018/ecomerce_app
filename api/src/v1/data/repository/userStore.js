@@ -3,7 +3,6 @@ import saveToDB from "../../../utils/db.js";
 
 const create = (user) => {
     user.id = users.length + 1;
-    console.log(user)
 
     users.push(user);
     saveToDB(users, "users");

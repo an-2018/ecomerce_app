@@ -3,8 +3,6 @@ import cartStore from "../data/repository/cartStore.js"
 
 export default class CartService {
     async create(data) {
-        console.log("cart service", data)
-
         return cartStore.create(data)
     }
 

@@ -21,7 +21,7 @@ export default class ProductController {
             const newproduct = await this.productService.create(new Product(data));
             res.status(201).json(newproduct);
         } catch (err) {
-            console.log(err.message)
+            console.log(err)
             res.status(500).json({ error: err.message })
         }
     }
@@ -74,7 +74,6 @@ export default class ProductController {
 
     async search(req, res) {
         try {
-            console.log(req.body)
             const searchQuery = {
                 text: req.body.text,
                 hasDiscount: req.body.hasDiscount,
@@ -83,7 +82,6 @@ export default class ProductController {
             }
 
             const result = await this.productService.search(searchQuery)
-            console.log(result)
             res.status(200).json({ products: result });
         } catch (err) {
             console.log(err)

@@ -3,8 +3,6 @@ import userStore from "../data/repository/userStore.js"
 
 export default class UserService {
     async create(data) {
-        console.log("service", data)
-
         return userStore.create(data)
     }
 
@@ -22,10 +20,8 @@ export default class UserService {
         user.wishlist.forEach(item => {
             if (Number(item.id) === Number(data.productId)) {
                 isIn = true
-                console.log("is in")
             }
         });
-        console.log(isIn)
         if (!isIn) {
             user.wishlist.push(data.product)
         }
