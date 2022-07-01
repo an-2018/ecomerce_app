@@ -15,7 +15,7 @@ class BottonNavigationWidget extends StatefulWidget {
 }
 
 class _BottonNavigationWidgetState extends State<BottonNavigationWidget> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -49,37 +49,35 @@ class _BottonNavigationWidgetState extends State<BottonNavigationWidget> {
         BottomNavigationBarItem(
           icon: Icon(
             Icons.home,
-            color: AppColors.main,
           ),
           label: "Home",
         ),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-              color: AppColors.main,
             ),
             label: "Search"),
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.heart_broken,
-              color: AppColors.main,
-            ),
-            label: "wishes"),
+          icon: Icon(
+            Icons.favorite,
+          ),
+          label: "wishes",
+        ),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.shopping_cart_sharp,
-              color: AppColors.main,
             ),
             label: "Cart"),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: AppColors.main,
             ),
             label: "Profile")
       ],
       currentIndex: _selectedIndex,
-      onTap: _onItemTap,
+      selectedItemColor: Colors.amber,
+      unselectedItemColor: Colors.grey.shade400,
+      onTap: (index) => _onItemTap(index),
     );
   }
 }

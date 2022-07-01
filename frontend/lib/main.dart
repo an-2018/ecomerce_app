@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'NuSaBom',
         theme: ThemeData(
           primarySwatch: Colors.amber,
