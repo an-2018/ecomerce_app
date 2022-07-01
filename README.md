@@ -41,7 +41,7 @@ Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` 
 - [x]  Save products in a a wish list of its clients;
 - [ ]  Allow users to let comments and make review on products;
 
-## Trabalhos Futuros | TODO's
+## TODO's
 **API**
 - [ ] Nest Implementation (Typescript, OOP, Architeture)
 - [ ] TypeORM and Data Persistence
