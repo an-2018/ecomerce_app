@@ -54,6 +54,7 @@ Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` 
 - [ ] Web and Mobile platform features(select text, darthtml, named urls)
 - [ ] Animations (Rive...)
 - [ ] Theme customization
+- [ ] Build Deploy APK
 
 ## Documentation
 Link to the postman documentation here:
