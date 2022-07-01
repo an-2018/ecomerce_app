@@ -21,6 +21,7 @@ Follow the steps on `api/README.md` to run the api, and on `frontend/README.md` 
 
 ## Features - Frontend Mobile
 - [x]  List products;
+- [x] List product Detail
 - [x]  Filter and search for products by name, adjectives, discounts, price;
 - [x]  Save selected products to the shopping cart;
 - [x]  Save products in a a wish list of its clients;
