@@ -166,24 +166,26 @@ class _HomeDesktopState extends State<HomeDesktop> {
   }
 
   Widget buildProductList(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 3,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      children: productProvider.products
-          .take(6)
-          .map(
-            (product) => ProductCard(
-              addToCartAction: () => widget.controller.addToCart(product),
-              goToDetailAction: () => Navigator.pushNamed(
-                  context, "${AppRoutes.productDetail}/${product.id}"),
-              title: product.name,
-              mainImage: product.gallery[0],
-              price: "${product.price}",
-              rating: '',
-            ),
-          )
-          .toList(),
+    return Consumer<ProductProvider>(
+      builder: (context, productProvider, _) => GridView.count(
+        crossAxisCount: 3,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        children: productProvider.products
+            .take(6)
+            .map(
+              (product) => ProductCard(
+                addToCartAction: () => widget.controller.addToCart(product),
+                goToDetailAction: () => Navigator.pushNamed(
+                    context, "${AppRoutes.productDetail}/${product.id}"),
+                title: product.name,
+                mainImage: product.gallery[0],
+                price: "${product.price}",
+                rating: '',
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 
